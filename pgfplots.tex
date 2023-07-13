@@ -1,0 +1,36 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\title{PGFPlots}
+\author{Jarno van der Kolk}
+\begin{document}
+	\maketitle
+	\section{Introduction}
+	The graph in figure \ref{fig:pgf} is generated dynamically from CSV data. Notice how you can zoom in as much as you like, the image will stay sharp!
+	\begin{figure}[h]
+		\begin{tikzpicture}
+			\begin{axis}[
+				title={Voltage variability},
+				xlabel={Time (s)},
+				ylabel={Voltage (V)},
+				legend pos=north west,
+				ymajorgrids=true,
+				grid style=dashed,
+				]
+				
+				\addplot table [
+				color=blue,
+				mark=square,
+				col sep=comma,
+				] {pgfplots_data.csv};
+				\legend{Sensor}
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This data is dynamically plotted using data from \texttt{pgfplots\_data.csv}}
+		\label{fig:pgf}
+	\end{figure}
+\end{document}

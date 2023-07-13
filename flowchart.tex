@@ -1,0 +1,39 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning}
+\title{Flowcharts}
+\author{Jarno van der Kolk}
+\begin{document}
+	\maketitle
+	\section{Introduction}
+	This demonstrates how to create flow charts. It requires the \texttt{tikz} package.
+	\begin{figure}
+		% Define a node
+		\tikzstyle{block} = [rectangle, draw, fill=gray!5, 
+		text width=.4\columnwidth, text centered, rounded corners, minimum height=2em]
+		\tikzstyle{line} = [thick,draw, -latex']
+		\begin{tikzpicture}[node distance = 3em and 4em, auto]
+			% Draw the blocks. Note that the "block" shape is defined earlier
+			\node[block] (init) {Start};
+			\node[block, below = of init] (step1) {Step 1};
+			\node[block, below = of step1] (step2) {Step 2};
+			\node[block, right = of step2] (step2a) {Step 2A};
+			\node[block, below = of step2] (step3) {Step 3};
+			\node[block, below = of step3] (end) {End};
+
+			% Draw the lines connecting the block. Again, "line" is defined earlier
+			\path[line] (init) to (step1);
+			\path[line] (step1) to (step2);
+			\path[line] (step2) to node {No} (step3);
+			\path[line] (step2) to node {Yes} (step2a);
+			\path[line] (step2a) to[out=270,in=0] (step3);
+			\path[line] (step3) to (end);
+		\end{tikzpicture}
+		\caption{Example of a flow chart}
+	\end{figure}
+\end{document}
